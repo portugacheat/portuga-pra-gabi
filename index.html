@@ -2,13 +2,13 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Para Gabi — De Portuga com Amor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Para Gabi — De Portuga com Amor 💖</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Segoe UI', Roboto, sans-serif;
-      background: linear-gradient(135deg, #ffd6e0 0%, #ffe9f2 40%, #f9f0ff 100%);
+      background: linear-gradient(135deg, #ffd6e0, #ffe9f2, #f9f0ff);
       height: 100vh;
       display: flex;
       align-items: center;
@@ -53,6 +53,7 @@
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
       cursor: pointer;
       transition: all 0.3s ease;
+      margin-top: 1rem;
     }
     .play-btn:hover {
       background: #ffe9f2;
@@ -72,6 +73,12 @@
       from { transform: translateY(0) scale(0.9); opacity: 1; }
       to { transform: translateY(-800px) scale(1.2); opacity: 0; }
     }
+    @media (prefers-color-scheme: dark) {
+      body { background: linear-gradient(135deg, #3b1d3a, #5e2f55, #8a4e7a); }
+      .card { background: rgba(255,255,255,0.1); color: #fff; }
+      .mensagem { color: #ffe9f2; }
+      .assinatura { color: #ffd6e0; }
+    }
   </style>
 </head>
 <body>
@@ -79,12 +86,13 @@
     <h1>Para Gabi 💖</h1>
     <div class="mensagem" id="mensagem"></div>
     <div class="assinatura">Com amor, Portuga 💫</div>
-    <button class="play-btn" id="playBtn">🎵 Tocar música</button>
+    <button class="play-btn" id="playBtn">💞 Ouvir nossa música</button>
   </div>
 
-  <iframe id="ytplayer" width="0" height="0" style="position:absolute;left:-9999px;"
-    src="https://www.youtube.com/embed/B_Oq1PsheEI?loop=1&playlist=B_Oq1PsheEI">
-  </iframe>
+  <!-- Player oculto -->
+  <audio id="bgmusic" loop>
+    <source src="music/deixa.mp3" type="audio/mp3">
+  </audio>
 
   <script>
     const mensagens = [
@@ -94,103 +102,88 @@
       "Nada no mundo brilha mais do que o seu olhar quando sorri.",
       "Seu abraço é o lugar onde o tempo para e a paz começa.",
       "Você é a razão das minhas melhores lembranças.",
-      "Se eu pudesse escolher de novo, escolheria você todas as vezes.",
       "Te amo não pelo que você é, mas pelo que sou quando estou com você.",
-      "Quando penso em amor, o seu nome é a primeira coisa que me vem à mente.",
+      "O amor mora onde você está.",
       "Você é o meu acaso mais bonito.",
       "O destino foi generoso quando cruzou o meu caminho com o seu.",
       "Com você, até o silêncio tem significado.",
       "Te amar é o capítulo mais bonito da minha vida.",
-      "Nada é mais doce que ouvir o seu nome na minha voz.",
-      "Meu coração sorri toda vez que penso em você.",
       "Você é o verso mais bonito da minha canção favorita.",
       "A sorte mais linda foi te encontrar.",
-      "O amor mora no seu sorriso.",
+      "O amor me encontrou quando encontrei você.",
       "Se amar é um sonho, que eu nunca acorde.",
-      "A vida é mais leve quando você está nela.",
       "Você é o meu sempre preferido.",
       "Não há distância que afaste o que o coração já escolheu.",
       "O seu olhar tem o poder de curar qualquer dia ruim.",
-      "Meu amor por você cresce mesmo nos silêncios.",
-      "Te amar é fácil, é natural, é inevitável.",
-      "Se eu tivesse um desejo, seria poder te ver sorrindo todos os dias.",
-      "Cada batida do meu coração sussurra o seu nome.",
-      "Você é o motivo do brilho nos meus olhos.",
-      "O tempo pode passar, mas o meu amor por você só aumenta.",
-      "O amor verdadeiro tem o seu nome e o seu jeito.",
-      "Nada é coincidência quando o destino é você.",
-      "Te amar é viver em poesia.",
-      "O mundo fica mais bonito quando penso em você.",
-      "Você é a calmaria que meu coração sempre procurou.",
-      "Quando estou com você, tudo faz sentido.",
-      "Amar você é a minha forma preferida de ser feliz.",
-      "Mesmo sem palavras, meu coração grita o seu nome.",
+      "Meu coração sorri toda vez que penso em você.",
       "Você é o meu para sempre disfarçado de agora.",
       "Nada é impossível quando o amor é verdadeiro.",
       "Você é a razão de eu acreditar em destino.",
-      "Se o amor tivesse um rosto, seria o seu.",
+      "Te amar é viver em poesia.",
+      "O mundo fica mais bonito quando penso em você.",
+      "Você é a calmaria que meu coração sempre procurou.",
+      "Amar você é a minha forma preferida de ser feliz.",
+      "Mesmo sem palavras, meu coração grita o seu nome.",
+      "Nada é coincidência quando o destino é você.",
+      "O amor verdadeiro tem o seu nome e o seu jeito.",
       "O brilho dos seus olhos ilumina até os meus dias nublados.",
       "Você é o meu lar em qualquer lugar do mundo.",
-      "Amar você é viver um sonho acordado.",
+      "Com você, o simples vira extraordinário.",
+      "Você é o sorriso que ilumina o meu dia.",
+      "Te amar é a minha maior aventura.",
+      "Meu coração pertence a você desde o primeiro olhar.",
+      "Nada é tão bonito quanto o amor que há entre nós.",
+      "Você é o meu porto seguro e minha maior loucura.",
+      "Você é a resposta que eu nem sabia que procurava.",
+      "Você é o toque de poesia que faltava na minha vida.",
+      "Meu coração é seu, hoje e sempre.",
+      "Você é o melhor acaso que já aconteceu na minha vida.",
+      "Cada segundo ao seu lado vale por mil dias.",
+      "Você é o motivo do meu melhor sorriso.",
+      "Te amar é o meu melhor hábito.",
+      "Nada se compara ao brilho do seu olhar.",
+      "Você é o meu pedaço favorito de eternidade.",
+      "A vida é mais bonita com você dentro dela.",
+      "Você é o sonho que se tornou minha realidade.",
+      "Meu amor por você é infinito, como o céu ao entardecer.",
+      "Te amo de um jeito que o tempo nunca vai apagar.",
+      "Você é o melhor presente que a vida me deu.",
+      "Amar você é minha forma preferida de existir.",
       "O amor é simples, porque é você.",
-      "Cada mensagem sua é um pedacinho de felicidade.",
-      "Eu me apaixono por você todos os dias, como se fosse a primeira vez.",
-      "Você é o sorriso que meu coração escolheu guardar.",
-      "Entre todas as pessoas do mundo, foi você que o meu coração escolheu.",
-      "Você é o detalhe que fez minha vida se tornar extraordinária.",
-      "Te amar é como ouvir a minha música favorita: nunca cansa.",
-      "Nada é mais bonito do que o amor que sinto por você.",
-      "Você é a parte bonita de todos os meus dias.",
-      "O tempo não apaga o que é verdadeiro — e o meu amor por você é eterno.",
-      "Você é a prova de que o amor existe.",
-      "Meu coração é mais leve quando penso em você.",
-      "Não existe dia ruim com você por perto.",
-      "Amar você é a minha oração mais bonita.",
-      "Se o amor é uma arte, você é minha obra-prima.",
       "A cada olhar seu, eu encontro um novo motivo pra sorrir.",
       "Você é o meu pedacinho de céu.",
       "Meu amor por você não cabe em palavras.",
+      "Nada me faz mais feliz do que estar com você.",
+      "Você é o detalhe que fez minha vida se tornar extraordinária.",
+      "Você é o meu paraíso particular.",
+      "Se o destino fosse um livro, nosso capítulo seria o mais bonito.",
       "Você é a certeza em meio a todas as minhas dúvidas.",
       "O universo sorriu quando nos uniu.",
-      "Nada me faz mais feliz do que estar com você.",
-      "Você é o melhor acaso que já aconteceu na minha vida.",
-      "Cada segundo ao seu lado vale por mil dias.",
-      "Você é a razão da minha melhor versão.",
+      "Nada é mais bonito do que o amor que sinto por você.",
+      "Você é a parte bonita de todos os meus dias.",
+      "Você é o motivo da minha melhor versão.",
       "Te amar é meu maior privilégio.",
       "Com você, até o impossível fica fácil.",
       "Seu amor é o meu refúgio.",
       "Eu te amo em cada detalhe e em cada silêncio.",
       "Nada é mais verdadeiro do que o que sinto por você.",
       "Você é a calmaria do meu caos.",
-      "Amar você é minha forma preferida de existir.",
-      "Quando estou com você, o tempo voa — e eu queria que ele ficasse.",
-      "Você é o sonho que se tornou minha realidade.",
-      "Meu coração pertence a você desde o primeiro olhar.",
-      "Nada é tão bonito quanto o amor que há entre nós.",
-      "Você é a razão pela qual acredito em milagres.",
-      "O seu abraço é meu lugar favorito no mundo.",
-      "Se o amor fosse uma melodia, teria a sua voz.",
       "Você é o começo, o meio e o fim de todos os meus planos.",
-      "Meu amor por você é infinito, como o céu ao entardecer.",
-      "Te amo de um jeito que o tempo nunca vai apagar.",
-      "Você é o melhor presente que a vida me deu.",
-      "Com você, o simples vira extraordinário.",
-      "Você é o sorriso que ilumina o meu dia.",
-      "Te amar é a minha maior aventura.",
-      "O amor mora onde você está.",
-      "Você é o toque de poesia que faltava na minha vida.",
-      "Meu coração é seu, hoje e sempre.",
-      "Se o destino fosse um livro, nosso capítulo seria o mais bonito.",
-      "Você é a resposta que eu nem sabia que procurava.",
-      "O amor me encontrou quando encontrei você.",
-      "Você é o meu porto seguro e minha maior loucura.",
-      "Meu amor por você é constante como o nascer do sol.",
-      "Você é o motivo do meu melhor sorriso.",
-      "Te amar é o meu melhor hábito.",
-      "Nada se compara ao brilho do seu olhar.",
-      "Você é o meu pedaço favorito de eternidade.",
-      "A vida é mais bonita com você dentro dela."
+      "Meu amor por você cresce mesmo nos silêncios.",
+      "Você é a prova de que o amor existe.",
+      "O tempo pode passar, mas o meu amor por você só aumenta.",
+      "Você é o meu pedaço de paz em meio ao mundo.",
+      "Se o amor tivesse um rosto, seria o seu.",
+      "Meu coração é mais leve quando penso em você.",
+      "Você é a poesia que o destino escreveu pra mim.",
+      "Amar você é o meu milagre diário.",
+      "Você é o meu lar, onde quer que eu esteja.",
+      "Nada no mundo me faz sorrir como você.",
+      "Você é o amor da minha vida, e sempre será."
     ];
+
+    const mensagemEl = document.getElementById("mensagem");
+    const mensagem = mensagens[Math.floor(Math.random() * mensagens.length)];
 
     function typeText(element, text, speed = 40) {
       let i = 0;
@@ -204,10 +197,9 @@
       type();
     }
 
-    const mensagemEl = document.getElementById("mensagem");
-    const mensagem = mensagens[Math.floor(Math.random() * mensagens.length)];
     typeText(mensagemEl, mensagem);
 
+    // corações animados
     for (let i = 0; i < 25; i++) {
       const heart = document.createElement("div");
       heart.className = "heart";
@@ -218,11 +210,22 @@
       document.body.appendChild(heart);
     }
 
+    // player de música com fade-in
     const playBtn = document.getElementById("playBtn");
+    const audio = document.getElementById("bgmusic");
     playBtn.addEventListener("click", () => {
-      const iframe = document.getElementById("ytplayer");
-      iframe.src = "https://www.youtube.com/embed/B_Oq1PsheEI?autoplay=1&loop=1&playlist=B_Oq1PsheEI";
-      playBtn.textContent = "🎶 Tocando...";
+      let vol = 0;
+      audio.volume = 0;
+      audio.play();
+      const fade = setInterval(() => {
+        if (vol < 1) {
+          vol += 0.05;
+          audio.volume = vol;
+        } else {
+          clearInterval(fade);
+        }
+      }, 200);
+      playBtn.textContent = "🎶 Tocando nossa música...";
       playBtn.disabled = true;
       playBtn.style.opacity = "0.6";
     });
