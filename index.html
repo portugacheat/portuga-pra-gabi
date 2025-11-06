@@ -43,9 +43,9 @@
       color: #6f4e72;
       font-weight: 600;
     }
-    .play-btn {
+    .link-musica {
+      display: inline-block;
       background: #fff;
-      border: none;
       border-radius: 50px;
       padding: 0.8rem 1.5rem;
       font-size: 1rem;
@@ -53,9 +53,10 @@
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
       cursor: pointer;
       transition: all 0.3s ease;
-      margin-top: 1rem;
+      margin-top: 1.2rem;
+      text-decoration: none;
     }
-    .play-btn:hover {
+    .link-musica:hover {
       background: #ffe9f2;
       transform: scale(1.05);
     }
@@ -86,13 +87,11 @@
     <h1>Para Gabi 💖</h1>
     <div class="mensagem" id="mensagem"></div>
     <div class="assinatura">Com amor, Portuga 💫</div>
-    <button class="play-btn" id="playBtn">💞 Ouvir nossa música</button>
+    <a href="https://www.youtube.com/watch?v=B_Oq1PsheEI&list=RDB_Oq1PsheEI&start_radio=1" 
+       target="_blank" class="link-musica">
+      💞 Ouvir nossa música no YouTube
+    </a>
   </div>
-
-  <!-- Player oculto -->
-  <audio id="bgmusic" loop>
-    <source src="music/deixa.mp3" type="audio/mp3">
-  </audio>
 
   <script>
     const mensagens = [
@@ -199,7 +198,7 @@
 
     typeText(mensagemEl, mensagem);
 
-    // corações animados
+    // corações flutuando
     for (let i = 0; i < 25; i++) {
       const heart = document.createElement("div");
       heart.className = "heart";
@@ -209,26 +208,6 @@
       heart.style.transform = `scale(${0.8 + Math.random() * 0.8})`;
       document.body.appendChild(heart);
     }
-
-    // player de música com fade-in
-    const playBtn = document.getElementById("playBtn");
-    const audio = document.getElementById("bgmusic");
-    playBtn.addEventListener("click", () => {
-      let vol = 0;
-      audio.volume = 0;
-      audio.play();
-      const fade = setInterval(() => {
-        if (vol < 1) {
-          vol += 0.05;
-          audio.volume = vol;
-        } else {
-          clearInterval(fade);
-        }
-      }, 200);
-      playBtn.textContent = "🎶 Tocando nossa música...";
-      playBtn.disabled = true;
-      playBtn.style.opacity = "0.6";
-    });
   </script>
 </body>
 </html>
